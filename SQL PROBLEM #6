@@ -1,0 +1,9 @@
+select id, case 
+when p_id is null then 'Root'
+when p_id in (select id from tree) and id in (select p_id from tree) then 'Inner'
+ELSE 'Leaf'
+end as type
+from Tree
+/*If a number is 'NULL' in p_id, then it is a root node
+If a number appears in both id and p_id, it is an inner node
+If a number only appears in id and not in p_id, it is a leaf node*/
